@@ -23,7 +23,7 @@ the demo may show slower performance compared to a local deployment.
 
 ## Workflow
 
-![Flow Chart]("img/1.png")
+![Workflow diagram showing the eye-tracking system steps](img/1.png "Workflow Diagram")
 ## Key Parameters
 
 ### EAR Threshold
