@@ -30,6 +30,9 @@ the demo may show slower performance compared to a local deployment.
 Defines when a blink is registered. Default: `0.25`.
 - Adjust between `0.20` and `0.30` based on user preferences.
 
+![Workflow diagram showing the eye-tracking system steps](img/2.png "Workflow Diagram")
+
+
 ### Cooldown Time
 Prevents multiple key presses during a single prolonged blink. Default: `1000 ms`.
 
