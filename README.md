@@ -23,15 +23,7 @@ the demo may show slower performance compared to a local deployment.
 
 ## Workflow
 
-```mermaid
-graph TD
-    A[Camera Frames] --> B[MediaPipe FaceMesh]
-    B --> C[Compute Gaze (Cursor Position)]
-    C --> D[Check EAR (Blink Detection)]
-    D --> E[Key Press? (If Blink)]
-    E --> F[Update Typed Text & UI Feedback]
-```
-
+![Flow Chart]("img\1.png")
 ## Key Parameters
 
 ### EAR Threshold
