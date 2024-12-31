@@ -23,7 +23,7 @@ the demo may show slower performance compared to a local deployment.
 
 ## Workflow
 
-![Flow Chart]("img\1.png")
+![Flow Chart]("img/1.png")
 ## Key Parameters
 
 ### EAR Threshold
