@@ -13,10 +13,18 @@ the demo may show slower performance compared to a local deployment.
 - Customizable parameters, such as blink thresholds and cooldown times.
 - Deployment-ready in Next.js.
 
+## Features
+
+- Real-time detection of facial landmarks using MediaPipe FaceMesh.
+- Conversion of landmark positions into a 2D on-screen cursor.
+- Blink-based text input using the Eye Aspect Ratio (EAR).
+- Customizable parameters, such as blink thresholds and cooldown times.
+- Deployment-ready in Next.js.
+
 ## Workflow
 
 ```mermaid
-flowchart TD
+graph TD
     A[Camera Frames] --> B[MediaPipe FaceMesh]
     B --> C[Compute Gaze (Cursor Position)]
     C --> D[Check EAR (Blink Detection)]
