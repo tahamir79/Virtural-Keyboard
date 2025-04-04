@@ -157,6 +157,53 @@ export default function Home() {
     }
   }, []);
 
+  const [calibrationData, setCalibrationData] = useState({
+    topLeft: null,
+    topRight: null,
+    bottomLeft: null,
+    bottomRight: null,
+  });
+  const [scaleFactors, setScaleFactors] = useState({
+    offsetX: 0,
+    offsetY: 0,
+    scaleX: 1,
+    scaleY: 1,
+  });
+
+  function handleCalibrationPoint(corner) {
+    setCalibrationData(prev => ({
+      ...prev,
+      [corner]: { x: cursorPosition.x, y: cursorPosition.y },
+    }));
+  }
+
+  function finalizeCalibration() {
+    const { topLeft, topRight, bottomLeft, bottomRight } = calibrationData;
+    if (!topLeft || !topRight || !bottomLeft || !bottomRight) return;
+
+    const dx = topRight.x - topLeft.x;
+    const dy = bottomLeft.y - topLeft.y;
+    const idealDx = window.innerWidth;
+    const idealDy = window.innerHeight;
+
+    const scaleX = idealDx / dx;
+    const scaleY = idealDy / dy;
+
+    setScaleFactors({
+      offsetX: topLeft.x,
+      offsetY: topLeft.y,
+      scaleX,
+      scaleY,
+    });
+  }
+
+  function updateCursor(rawX, rawY) {
+    const { offsetX, offsetY, scaleX, scaleY } = scaleFactors;
+    const calibratedX = (rawX - offsetX) * scaleX;
+    const calibratedY = (rawY - offsetY) * scaleY;
+    setCursorPosition({ x: calibratedX, y: calibratedY });
+  }
+
   useEffect(() => {
     const videoElement = videoRef.current;
     const faceMesh = new FaceMesh({
@@ -192,7 +239,7 @@ export default function Home() {
         const alpha = 0.2;
         const smoothedX = alpha * screenX + (1 - alpha) * prevCursorPosition.current.x;
         const smoothedY = alpha * screenY + (1 - alpha) * prevCursorPosition.current.y;
-        setCursorPosition({ x: smoothedX, y: smoothedY });
+        updateCursor(smoothedX, smoothedY);
         prevCursorPosition.current = { x: smoothedX, y: smoothedY };
         const hoveredElement = document.elementFromPoint(smoothedX, smoothedY);
         if (hoveredElement && hoveredElement.dataset && hoveredElement.dataset.value) {
@@ -256,6 +303,11 @@ export default function Home() {
         setHoveredKey={setHoveredKey}
         getKeyStyle={getKeyStyle}
       />
+      <button onClick={() => handleCalibrationPoint('topLeft')}>Calibrate Top Left</button>
+      <button onClick={() => handleCalibrationPoint('topRight')}>Calibrate Top Right</button>
+      <button onClick={() => handleCalibrationPoint('bottomLeft')}>Calibrate Bottom Left</button>
+      <button onClick={() => handleCalibrationPoint('bottomRight')}>Calibrate Bottom Right</button>
+      <button onClick={finalizeCalibration}>Finalize Calibration</button>
     </div>
   );
 }
