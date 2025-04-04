@@ -30,6 +30,7 @@ the demo may show slower performance compared to a local deployment.
 Defines when a blink is registered. Default: `0.25`.
 - Adjust between `0.20` and `0.30` based on user preferences.
 
+<<<<<<< HEAD
 ### Cooldown Time
 Prevents multiple key presses during a single prolonged blink. Default: `1000 ms`.
 
@@ -38,6 +39,19 @@ Maps small eye movements to broader on-screen cursor movements. Default: `5.0`.
 
 ## Example Code Snippets
 
+=======
+![Workflow diagram showing the eye-tracking system steps](img/2.png "Workflow Diagram")
+
+
+### Cooldown Time
+Prevents multiple key presses during a single prolonged blink. Default: `1000 ms`.
+
+### Gaze Scale
+Maps small eye movements to broader on-screen cursor movements. Default: `5.0`.
+
+## Example Code Snippets
+
+>>>>>>> 184a86f7cabe71bd3d99e6a7cafed1ebedbff0ed
 ### States and Parameters in `page.js`
 ```javascript
 export default function Home() {
